@@ -171,9 +171,9 @@ void UKF::ProcessMeasurement(MeasurementPackage m_pack) {
     
     if ( use_laser_ && m_pack.sensor_type_ == MeasurementPackage::LASER) {
 	
-	Lidar (m_pack);
-	Prediction (dt);   // Predict state 'dt' forward
-
+	if (false)
+	    Lidar (m_pack);           // Log measurement to console
+	Prediction (dt);              // Predict state 'dt' forward
 	if (use_std_update_) 
 	    UpdateLidar_std (m_pack); // Standard Kalman update
 	else 
@@ -181,17 +181,21 @@ void UKF::ProcessMeasurement(MeasurementPackage m_pack) {
 	
     } else if ( use_radar_ && m_pack.sensor_type_ == MeasurementPackage::RADAR) {
 
-	Radar (m_pack);
-	Prediction (dt);   // Predict state 'dt' forward
-	UpdateRadar (m_pack);
+	if (false)
+	    Radar (m_pack);   // Log measurement to console
+	Prediction (dt);      // Predict state 'dt' forward
+	UpdateRadar (m_pack); // Update filter state
 
     } else {
 
-	// Nothing to be done!
-	return;
+	// Not execting to get here, but if I do let's not miss it
+	throw ("Unexpected requset to process measurement");
+
     }
 
-    State();
+    if (false)
+	State();  // Log state vector to console
+    
     return;
 }
 

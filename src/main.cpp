@@ -36,6 +36,11 @@ int main(int argc, char** argv)
     double acc_variance = -1;
     int activeCars = 0;
 
+    if (argc > 1)
+	std::cerr << "\n\n Processing user input\n:";
+    else 
+	std::cerr << "\n\n";
+    
     for (short n=1; n<argc; n++) {
 	std::string option (argv[n]);
 	std::cout << " arg n=" << option << std::endl;
@@ -119,13 +124,9 @@ int main(int argc, char** argv)
 	highway.SetCar (activeCars-1);
     }
     
-    std::cout << " A \n";
     highway.Variance ("acc", acc_variance ); // Value will be checked
-    std::cout << " B \n";
     highway.Variance ("rate", rate_variance );
-    std::cout << " C \n";
     highway.Update ( std_kalman_update );
-    std::cout << " ABC \n";
 
     
     int frame_per_sec = 30;

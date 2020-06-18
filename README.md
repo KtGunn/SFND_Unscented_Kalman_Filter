@@ -1,7 +1,16 @@
 # SFND_Unscented_Kalman_Filter
-Sensor Fusion UKF Highway Project Starter Code
+Fourth and final project of Udacity Sensor Fusion Nanodegree Program
 
 <img src="media/ukf_highway_tracked.gif" width="700" height="400" />
+
+The purpose of the project is to implement an Unscented Kalman Filter. Data is generated from a simulation of a car, the ego car, driving on a higway. The ego car is equipped with lidar and radar sensors and measures location of three cars in its environment as they move behind, in front and by it. The data is to be fused in a filter for best estimate of each car's two dimensional position, speed and turn rate.
+
+Simulation and starter code is provided. The simulation code generates the measurement data from the surrounding cars. The simulation code also includes all necessary code for visualizing the simulation and its results (see gif above).
+
+The starter code provides header file for unscented filter implementation and prototypes for the main processing steps in a Kalman filter implementation, i.e. measurement processing, state prediction and measurement update. The student is to fill in the implementation, which was developed in detail in class room lectures.
+
+Finally, the simulation code monitors filter implementation's ability to accurately estimate the cars' state. A successful implementation must pass RMSE (root mean square error) limits. At each step the RMSE is displayed and should the success criteria not be met, a display announcing the failure shows up. To meet the success criteria the student must implement the filter correctly and tune it to meet the accuracy criteria. The filter implementation assumes the CVTR Tuning means setting values for two process noise variances, acceleration and yaw rate.
+
 
 In this project you will implement an Unscented Kalman Filter to estimate the state of multiple cars on a highway using noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric. 
 

@@ -325,7 +325,9 @@ class Highway
 	ePlots->setXTitle("Update count");
 	ePlots->setYTitle("Error = Ground truth - Estimate");
 	ePlots->setShowLegend(true);
-	
+
+	// this does not work!
+	ePlots->setWindowPosition(800+100*carID, 300*(carID-1));
 	
 	// Speed error
 	std::vector<double> vIndices;
@@ -373,6 +375,8 @@ class Highway
 	    vPlts[carID]->setXTitle("Update count (doubled)");
 	    vPlts[carID]->setYTitle("NIS");
 
+	    // this does not work!
+	    vPlts[carID]->setWindowPosition(400+100*carID, 300*(carID-1));
 	}
 
 	vPlts[carID]->clearPlots ();
@@ -406,9 +410,6 @@ class Highway
 	    vPlts[carID]->addPlotData (aX, aY, 2, "Radar 95%");
 
 	}
-	
-	std::cout << traffic[carID].ukf.vNIS_radar_.size() << " radar points \n";
-	std::cout << traffic[carID].ukf.vNIS_lidar_.size() << " lidar points \n";
 	
 	vPlts[carID]->spinOnce(1);
 

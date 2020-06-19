@@ -27,7 +27,18 @@ Command line arguments were added to aid development and testing. The user can s
 
 ### Performance plots
 
-Two plot are presented during and after the simulation. The first is NIS (Normalized Innovation Squared). NIS is an indicator of proper tuning. Proper tuning is attained when the predicted measurement in the update step is within statistical bounds of the actual measurement. If the discrepancy is either consistently too large or too small the tuning is off. It is also possible that the modeling of the real process is wrong but that is a different matter. The NIS, a scalar, follows the chi-sqaured distribution, so expected targets can be set based on the number of measurement variables ("degrees of freedom"). Below is an example NIS plot. The simulation uses traffic car #3 only. The horizontal lines in teh NIS plot represent the Chi-squared limits applicable to the two measurement update types, liadr and radar.
+Two plots are presented during and after the simulation.
+
+The first is NIS (Normalized Innovation Squared). NIS is an indicator of proper tuning. Proper tuning is attained when the predicted measurement in the update step is within statistical bounds of the actual measurement. If the discrepancy is either consistently too large or too small the tuning is off. It is also possible that the modeling of the real process is wrong but that is a different matter. The NIS, a scalar, follows the Chi-squared distribution. Expected targets can be set based on the number of measurement variables ("degrees of freedom").
+
+Below is an example NIS plot. The simulation uses traffic car #3 only. This car starts behind the ego, turn left and passes the ego car. The horizontal lines in thr NIS plot represent the Chi-squared limits applicable to the two measurement update types, lidar and radar.
 
 <img src="media/NIS-C3.png" />
 
+The second plot is the error of the modeled variables, velocity and yaw or turn rate. The base model assumes these are constant. But in real life situations they rarely are and not in this simularion. To account for their non-constancy, a noise, process noise, is added to the filter's statistical model. This is done by augmenting the state, i.e. adding state variables. We add two state variables, one for acceleration and yaw rate each, and model them as purely driven by noise. Augmentation using noise models is a standard Kalman Filter trick.
+
+It stands to reason that we wish to see how well the filter performs by plotting the error in these state variables. The error is defined as the difference between the actual simulated value, or ground truth, and the filter's estimated value. A successful filter will exhibit very small errors, certainly errors approaching zero asymptotically, if a steady state is attained.
+
+Below is an example error plot. Again, the simulation uses traffic car #3 only. 
+
+<img src="media/Error-C3.png" />

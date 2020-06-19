@@ -19,7 +19,15 @@ The filter implementation assumes the CTRV (Constant Turn Rate and Veolcity Magn
 
 The Kalman Filter was implemented as instructed in the classroom and developed over a course of exercises. A few changes and additions were made.
 
-Command line arguments were added to aid development and testing. The user can select ot simulate any of the three traffic cars solely or all three. Simluations can use lidar or radar only or both. Values for the two tuning parameters can be set both or individually. Finally, a standard Kalman Filter update can be used instead of the sigma point measurement estimation method. If no command line options are set, defaults using all three traffic cars, both sensors, simga point measurement and the final tuning parameters is used. That is the configuration to run when verifying that the RMSE criteria have been met for the project.
+### Command line arguments
 
-<img src="media/options.png" width="500" />
+Command line arguments were added to aid development and testing. The user can select to simulate any of the three traffic cars solely or all three. Simluations can use lidar or radar only or both. Values for the two tuning parameters can be set both or individually. Finally, a standard Kalman Filter update can be used instead of the sigma point measurement estimation method. If no command line options are set, defaults using all three traffic cars, both sensors, simga point measurement and the final tuning parameters is used. That is the configuration to run when verifying that the RMSE criteria have been met for the project.
+
+<img src="media/options.png" width="700" />
+
+### Performance plots
+
+Two plot are presented during and after the simulation. The first is NIS (Normalized Innovation Squared). NIS is an indicator of proper tuning. Proper tuning is attained when the predicted measurement in the update step is within statistical bounds of the actual measurement. If the discrepancy is either consistently too large or too small the tuning is off. It is also possible that the modeling of the real process is wrong but that is a different matter. The NIS, a scalar, follows the chi-sqaured distribution, so expected targets can be set based on the number of measurement variables ("degrees of freedom"). Below is an example NIS plot. The simulation uses traffic car #3 only. The horizontal lines in teh NIS plot represent the Chi-squared limits applicable to the two measurement update types, liadr and radar.
+
+<img src="media/NIS-C3.png" />
 

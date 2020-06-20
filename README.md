@@ -72,7 +72,7 @@ The image below shows results for a borderline case of accelearion variance of 5
 
 An observation can be made that the NIS plots are not a sensitive tool for adjusting the variance to meet the RMSE criteria. The above image passed the RMSE test with while showing good NIS values. However the error estimates indicate the filter struggles to suppress the errors. The error plots are the main indicator of estimation quality.
 
-Another interesting point to make is that the RMSE test can pass with all three traffic cars, but fail with the cars run individually. Below are the cases of running each car individually where only car 3 passes. My explanation is that the RMSE test is an average of RMSE for each car. If the test is performed when one car is in excellent agreement with the ground truth and the others not, their average RMSE value may be under the limit. The images below show the results of running each car individually at the optimal tuning pesented above. Only the bottom image for traffic car 3 passed the RMSE test.
+Another interesting point to make is that the RMSE test can pass with all three traffic cars, but fail with the cars run individually. Below are the cases of running each car individually where only car 3 passes. My explanation is that the RMSE test is an average of RMSE for all cars. If the test is performed when one car is in excellent agreement with the ground truth and the others not, their average RMSE value may be under the limit. The images below show the results of running each car individually at the optimal tuning pesented above. Only the bottom image for traffic car 3 passed the RMSE test.
 
 <img src="media/C1-FVy.png" />
 
@@ -80,4 +80,8 @@ Another interesting point to make is that the RMSE test can pass with all three 
 
 <img src="media/C3-Pass.png" />
 
+Finally, the images below show results for simulating traffic car 3 as before but this time with lidar or radar updates only. The lidar only simulation passes the RMSE test but radar only fails.
 
+<img src="media/C3-lidar-pass.png" />
+
+<img src="media/C3-radar-fail.png" />

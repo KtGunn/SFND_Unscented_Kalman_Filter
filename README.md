@@ -62,6 +62,8 @@ Therefore the standard Kalman Filter update was implemented in addition to the s
 
 ## Results
 
+<img src="media/Simulation.png" />
+
 The Unscented Kalman Filter was implemented successfully and tuned. The original values for acceleartion noise and yaw rate variances were set at 30, which was found to be grossly too large. After some expeimentation it was found that acceleration noise variance should be in the range  1  to 5, yaw rate variance in the range 1 to 7. This range was successful in meeting the RMSE criteria. The combination of acceleration variance of 3 and yaw rate variance of 1 was perhaps best. See the image immediately below.
 
 <img src="media/vA3_vR1.png" />

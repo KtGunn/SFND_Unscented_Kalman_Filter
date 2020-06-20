@@ -29,11 +29,16 @@ Command line arguments were added to aid development and testing. The user can s
 
 Two plots are presented during and after the simulation.
 
+#### Normalized Innovation Squared
+
 The first is NIS (Normalized Innovation Squared). NIS is an indicator of proper tuning. Proper tuning is attained when the predicted measurement in the update step is within statistical bounds of the actual measurement. If the discrepancy is either consistently too large or too small the tuning is off. It is also possible that the modeling of the real process is wrong but that is a different matter. The NIS, a scalar, follows the Chi-squared distribution. Expected targets can be set based on the number of measurement variables ("degrees of freedom").
 
 Below is an example NIS plot. The simulation uses traffic car #3 only. This car starts behind the ego, turn left and passes the ego car. The horizontal lines in thr NIS plot represent the Chi-squared limits applicable to the two measurement update types, lidar and radar.
 
 <img src="media/NIS-C3.png" />
+
+
+#### Estimation Error
 
 The second plot is the error of the modeled variables, velocity and yaw or turn rate. The base model assumes these are constant. But in real life situations they rarely are and not in this simularion. To account for their non-constancy, a noise, process noise, is added to the filter's statistical model. This is done by augmenting the state, i.e. adding state variables. We add two state variables, one for acceleration and yaw rate each, and model them as purely driven by noise. Augmentation using noise models is a standard Kalman Filter trick.
 
@@ -42,3 +47,16 @@ It stands to reason that we wish to see how well the filter performs by plotting
 Below is an example error plot. Again, the simulation uses traffic car #3 only. 
 
 <img src="media/Error-C3.png" />
+
+### Measurement Update
+
+The Kalman Filter applies to linear systems corrputed by Gaussian distributed zero mean noise. Most systems are not linear. The Unscented Kalman Filter is a method to use Kalman Filter methods to non-linear systems.
+
+Non-linearity can be either in the process or measurement. This project presents both. A vehicle moving along a curved path is a non-linear process in a Euclidean space. A radar data update is non-linear in a Euclidean process but a lidar data update is linear.
+
+The Kalman filter is a two step process: prediction and update. The purpose of prediction is to estimate the state and covariance of the system just prior to applying the update. The purpose of the update is to re-estimate the state vector and its covariance using a measurement. An update only needs a valid mean and covariance; how the mean and covariance were obtained does not matter. I figure therefore that in an Unscented implementation a linear update can be used with a sigma points state and covariance prediction.
+
+Therefore, the standard Kalman Filter update was implemented in addition to the sigma point estimation of the measurement. A command line option can select the standard update, but the sigma point method is default. The image below shows the result of simulating car #2 only using both sensors using the two methods of update. There is no discernible difference between them. We would have expected some difference between them. But if both methods of update are equally valid, then if the noise simulation is the same in the two runs, the results will be identical.
+
+<img src="media/std_sigma_C2.png" />
+

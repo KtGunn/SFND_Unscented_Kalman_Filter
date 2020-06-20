@@ -367,7 +367,8 @@ void UKF::UpdateLidar_std (MeasurementPackage m_pack) {
    * covariance, P_.
    * You can also calculate the lidar NIS, if desired.
    */
-
+    std::cout << " s t d\n";
+    
     MatrixXd H = MatrixXd(2,n_x_);
     H.fill(0.0);
     H(0,0) = 1.0;

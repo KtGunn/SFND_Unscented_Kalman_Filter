@@ -33,7 +33,7 @@ Two plots are presented during and after the simulation. These were created usin
 
 The first is NIS (Normalized Innovation Squared). NIS is an indicator of proper tuning. Proper tuning is attained when the predicted measurement in the update step is within statistical bounds of the actual measurement. If the discrepancy is either consistently too large or too small the tuning is off. It is also possible that the modeling of the real process is wrong but that is a different matter. The NIS, a scalar, follows the Chi-squared distribution. Expected targets can be set based on the number of measurement variables ("degrees of freedom").
 
-Below is an example NIS plot. The simulation uses traffic car #3 only. This car starts behind the ego, turns left and passes the ego car. The horizontal lines in the NIS plot represent the Chi-squared limits applicable to the two measurement update types, lidar and radar.
+Below is an example NIS plot. The simulation uses traffic car #3 only. This car starts behind the ego, turns left and passes the ego car. The horizontal lines in the NIS plot represent the Chi-squared limits applicable to the two measurement update types, lidar and radar. Despite the spike at around update 200, this classifies as a consistent filter tuning.
 
 <img src="media/NIS-C3.png" />
 

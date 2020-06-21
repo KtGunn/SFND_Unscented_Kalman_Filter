@@ -21,7 +21,7 @@ The Kalman Filter was implemented as instructed in the classroom and developed o
 
 ### Command line arguments
 
-Command line arguments were added to aid development and testing. The user can select to simulate any of the three traffic cars solely or all three. Simluations can use lidar or radar only or both. Values for the two tuning parameters can be set both or individually. Finally, a standard Kalman Filter update can be used instead of the sigma point measurement estimation method. If no command line options are set, defaults using all three traffic cars, both sensors, simga point measurement and the final tuning parameters is used. That is the configuration to run when verifying that the RMSE criteria have been met for the project.
+Command line arguments were added to aid development and testing. The user can select to simulate any of the three traffic cars solely or all three. Simluations can use lidar or radar only or both. Values for the two tuning parameters can be set both or individually. Finally, a standard Kalman Filter update can be used instead of the sigma point measurement estimation method. If no command line options are set, defaults using all three traffic cars, both sensors, sigma point measurement and the final tuning parameters is used. That is the configuration to run when verifying that the RMSE criteria have been met for the project.
 
 <img src="media/options.png" width="700" />
 

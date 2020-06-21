@@ -72,7 +72,7 @@ The image below shows results for a borderline case of accelearion variance of 5
 
 <img src="media/vA5_vR7.png" />
 
-An observation can be made that the NIS plots are not a sensitive tool for adjusting the variance to meet the RMSE criteria. The above image passed the RMSE test and showing good NIS values. However the error estimates indicate the filter struggles to suppress the errors, especially yaw rate. The error plots are therefore the main indicator of estimation quality.
+An observation can be made that the NIS plots are not a sensitive tool for adjusting the variance to meet the RMSE criteria. The above image passed the RMSE test showing good NIS values. However the error estimates indicate the filter struggles to suppress the errors, especially yaw rate. The error plots are therefore the main indicator of estimation quality.
 
 Another interesting point to make is that the RMSE test can pass with all three traffic cars, but fail with the cars run individually. Below are the cases of running each car individually where only car 3 passes. My explanation is that the RMSE test is an average of summed RMSE for all cars. If the test is performed when one car is in excellent agreement with the ground truth and the others not, the average RMSE value may be under the limit. The images below show the results of running each car individually at the optimal tuning pesented above. Only the bottom image for traffic car 3 passed the RMSE test.
 

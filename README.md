@@ -7,13 +7,13 @@ The purpose of the project is to implement an Unscented Kalman Filter. Data is g
 
 Simulation and starter code is provided. The simulation code generates the measurement data from the surrounding cars. The simulation code also includes all necessary code for visualizing the simulation and its results (see gif above).
 
-Referring to the visualization, the ego car is shown in green. Simluated lidar readings are red dots above and near each traffic car. Simulated lidar readings are purple arrows pointing at traffic cars. Actual velocity relative to the ego car is indicated.
+Referring to the visualization, the ego car is shown in green. Simluated lidar readings are red dots above and near each traffic car. Simulated radar readings are purple arrows pointing at traffic cars. Actual velocity relative to the ego car is indicated.
 
 The starter code provides header file for unscented filter implementation and prototypes for the main processing steps in a Kalman filter implementation, i.e. measurement processing, state prediction and measurement update. The student is to fill in the implementation, which was developed in detail in class room lectures.
 
 Finally, the simulation code monitors filter implementation's ability to accurately estimate the cars' state. A successful implementation must pass RMSE (root mean square error) limits. At each step the RMSE is displayed and should the success criteria not be met, a display announcing the failure shows up. To meet the success criteria the student must implement the filter correctly and tune it to meet the accuracy criteria.
 
-The filter implementation assumes the CTRV (Constant Turn Rate and Veolcity Magnitude) model. The simulated velocity and turn rates of traffic cars are non constant. The filter implementation accounts for that by modeling veolcity and rate changes as noise in the state equations. Tuning means setting values for two process noise variances, acceleration and yaw rate.
+The filter implementation assumes the CTRV (Constant Turn Rate and Veolcity Magnitude) model. The simulated velocity and turn rates of traffic cars are non constant. The filter implementation accounts for that by modeling veolcity and rate changes as process noise. Tuning means setting values for two process noise variances, acceleration and yaw rate.
 
 ## Implementation
 
@@ -27,13 +27,13 @@ Command line arguments were added to aid development and testing. The user can s
 
 ### Performance plots
 
-Two plots are presented during and after the simulation.
+Two plots are presented during and after the simulation. These were created using the Plotter class of PCL library.
 
 #### Normalized Innovation Squared
 
 The first is NIS (Normalized Innovation Squared). NIS is an indicator of proper tuning. Proper tuning is attained when the predicted measurement in the update step is within statistical bounds of the actual measurement. If the discrepancy is either consistently too large or too small the tuning is off. It is also possible that the modeling of the real process is wrong but that is a different matter. The NIS, a scalar, follows the Chi-squared distribution. Expected targets can be set based on the number of measurement variables ("degrees of freedom").
 
-Below is an example NIS plot. The simulation uses traffic car #3 only. This car starts behind the ego, turn left and passes the ego car. The horizontal lines in thr NIS plot represent the Chi-squared limits applicable to the two measurement update types, lidar and radar.
+Below is an example NIS plot. The simulation uses traffic car #3 only. This car starts behind the ego, turns left and passes the ego car. The horizontal lines in the NIS plot represent the Chi-squared limits applicable to the two measurement update types, lidar and radar.
 
 <img src="media/NIS-C3.png" />
 
@@ -50,11 +50,11 @@ Below is an example error plot. Again, the simulation uses traffic car #3 only.
 
 ### Measurement Update
 
-The Kalman Filter applies to linear systems corrputed by Gaussian distributed zero mean noise. Most systems are not linear. The Unscented Kalman Filter is a way to use Kalman Filter methods to non-linear systems.
+The Kalman Filter applies to linear systems corrputed by white Gaussian distributed zero mean noise. Most systems are not linear. The Unscented Kalman Filter is a way to use Kalman Filter methods to non-linear systems.
 
 Non-linearity can be either in the process or measurement. This project presents both. A vehicle moving along a curved path is a non-linear process in a Euclidean space. A radar data update is non-linear but a lidar data update is linear.
 
-The Kalman filter is a two step process: prediction and update. The purpose of prediction is to estimate the state and covariance of the system just prior to applying the update. The purpose of the update is to re-estimate the state vector and its covariance using a measurement. An update only needs a valid mean and covariance; how the mean and covariance were obtained does not matter. I figure that in an Unscented implementation a linear update can be used with a sigma points state and covariance prediction.
+The Kalman filter is a two step process: prediction and update. The purpose of prediction is to estimate the state and covariance of the system just prior to applying the update. The purpose of the update is to re-estimate the state vector and its covariance using a measurement to reduce its error. An update only needs a valid mean and covariance; how the mean and covariance were obtained does not matter. I figure that in an Unscented implementation a linear update can be used with a sigma points state and covariance prediction.
 
 Therefore the standard Kalman Filter update was implemented in addition to the sigma point estimation of the measurement. A command line option can select the standard update, but the sigma point method is default. The image below shows the result of simulating car #2 only using both sensors using the two methods of update. There is no discernible difference between them. We would have expected some difference between the two. But if both methods of update are equally valid, and noise simulation is the same in the two runs, the results will be identical.
 
@@ -72,9 +72,9 @@ The image below shows results for a borderline case of accelearion variance of 5
 
 <img src="media/vA5_vR7.png" />
 
-An observation can be made that the NIS plots are not a sensitive tool for adjusting the variance to meet the RMSE criteria. The above image passed the RMSE test with while showing good NIS values. However the error estimates indicate the filter struggles to suppress the errors. The error plots are the main indicator of estimation quality.
+An observation can be made that the NIS plots are not a sensitive tool for adjusting the variance to meet the RMSE criteria. The above image passed the RMSE test and showing good NIS values. However the error estimates indicate the filter struggles to suppress the errors, especially yaw rate. The error plots are therefore the main indicator of estimation quality.
 
-Another interesting point to make is that the RMSE test can pass with all three traffic cars, but fail with the cars run individually. Below are the cases of running each car individually where only car 3 passes. My explanation is that the RMSE test is an average of RMSE for all cars. If the test is performed when one car is in excellent agreement with the ground truth and the others not, their average RMSE value may be under the limit. The images below show the results of running each car individually at the optimal tuning pesented above. Only the bottom image for traffic car 3 passed the RMSE test.
+Another interesting point to make is that the RMSE test can pass with all three traffic cars, but fail with the cars run individually. Below are the cases of running each car individually where only car 3 passes. My explanation is that the RMSE test is an average of summed RMSE for all cars. If the test is performed when one car is in excellent agreement with the ground truth and the others not, the average RMSE value may be under the limit. The images below show the results of running each car individually at the optimal tuning pesented above. Only the bottom image for traffic car 3 passed the RMSE test.
 
 <img src="media/C1-FVy.png" />
 

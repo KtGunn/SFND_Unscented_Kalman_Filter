@@ -87,3 +87,30 @@ Finally, the images below show results for simulating traffic car 3 as before bu
 <img src="media/C3-lidar-pass.png" />
 
 <img src="media/C3-radar-fail.png" />
+
+## Installation
+
+The main program can be built and run by executing the following commands from the project top directory:
+
+0. Clone this repository
+1. mkdir build
+2. cd build
+3. cmake ..
+4. make
+5. ./ukf_highway
+
+See discussion in above section about command line arguments and options.
+
+There are important dependencies:
+
+* cmake >= 3.5
+  * All OSes: [click here for installation instructions](https://cmake.org/install/)
+* make >= 4.1 (Linux, Mac), 3.81 (Windows)
+  * Linux: make is installed by default on most Linux distros
+  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
+  * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
+* gcc/g++ >= 5.4
+  * Linux: gcc / g++ is installed by default on most Linux distros
+  * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
+  * Windows: recommend using [MinGW](http://www.mingw.org/)
+ * PCL 1.2
